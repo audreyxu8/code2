@@ -3,6 +3,10 @@
 // if(upOver(upPos.x, upPos.y, buttonSize.x, buttonSize.y)){} it said it couldn't take 4 floats?
 //so I didn't use them
 
+//20 points: Face your vehicle to the direction it is traveling
+//40 points: Add in vehicular movement (only turns like a car) (replaces cardinal directions)
+//30 points: Add in an end state when your square/vehicle overlaps a specific part of the screen (like a finish line)
+
 PVector carPos, carSize, upPos, downPos, leftPos, rightPos, buttonSize, velocity;
 color carColor, buttonColor, buttonHighlight;
 //boolean upOver = false;
@@ -27,28 +31,25 @@ void setup() {
   rightPos = new PVector(10, 220);
   buttonSize = new PVector(60, 60);
   velocity = new PVector(20, 20);
-  
-  
-   
+
+
+
   car = createShape(GROUP);
   body = createShape(RECT, carPos.x, carPos.y, carSize.x, carSize.y); 
   lightOne = createShape(ELLIPSE, carPos.x+15, carPos.y+15, 20, 20); 
-  lightOne.setFill(color(255,255,0));
+  lightOne.setFill(color(255, 255, 0));
   lightTwo = createShape(ELLIPSE, carPos.x+15, carPos.y+57, 20, 20); 
-  lightTwo.setFill(color(255,255,0));
-  
+  lightTwo.setFill(color(255, 255, 0));
+
   car.addChild(body);
   car.addChild(lightOne);
   car.addChild(lightTwo);
-
-  
-  
 }
 
 void draw() {
   background(50);
 
-  
+
   //rect(carPos.x, carPos.y, carSize.x, carSize.y); 
   pushMatrix();
   translate(carPos.x-500, carPos.y-300);
@@ -92,6 +93,13 @@ void draw() {
 
   rect(rightPos.x, rightPos.y, buttonSize.x, buttonSize.y);
 
+//boundaries
+  if (carPos.x>width){
+    carPos.x = width;
+  }
+  if(carPos.x<0){
+    carPos.x = 0;
+  }
   //icons
   fill(0, 0, 100);
   stroke(255);
@@ -99,25 +107,28 @@ void draw() {
   triangle(downPos.x, downPos.y, downPos.x + buttonSize.x, downPos.y, downPos.x+30, downPos.y+60);
   triangle(leftPos.x, leftPos.y, leftPos.x, leftPos.y + buttonSize.y, leftPos.x + 60, leftPos.y + 30);
   triangle(rightPos.x+60, rightPos.y, rightPos.x+60, rightPos.y + buttonSize.y, rightPos.x, rightPos.y + 30);
- 
- translate(carPos.x, carPos.y);
 
-  
-  }
+  translate(carPos.x, carPos.y);
+}
 
 
 void mouseClicked() {
-    if ((mouseX >= upPos.x && mouseX <= upPos.x+buttonSize.x && 
+  if ((mouseX >= upPos.x && mouseX <= upPos.x+buttonSize.x && 
     mouseY >= upPos.y && mouseY <= upPos.y+buttonSize.y)) {
     carPos.y=carPos.y-20;
-    }
-    
-    if ((mouseX >= downPos.x && mouseX <= downPos.x+buttonSize.x && 
+    pushMatrix();
+    translate(carPos.x, carPos.y);
+    rotate(radians(90));
+    shape(car);
+    popMatrix();
+  }
+
+  if ((mouseX >= downPos.x && mouseX <= downPos.x+buttonSize.x && 
     mouseY >= downPos.y && mouseY <= downPos.y+buttonSize.y)) {
-      carPos.y=carPos.y+20;
-    }
-    
-    
+    carPos.y=carPos.y+20;
+  }
+
+
   if ((mouseX >= leftPos.x && mouseX <= leftPos.x+buttonSize.x && 
     mouseY >= leftPos.y && mouseY <= leftPos.y+buttonSize.y)) {
     carPos.x = carPos.x + velocity.x;
