@@ -32,8 +32,6 @@ void setup() {
   buttonSize = new PVector(60, 60);
   velocity = new PVector(20, 20);
 
-
-
   car = createShape(GROUP);
   body = createShape(RECT, carPos.x, carPos.y, carSize.x, carSize.y); 
   lightOne = createShape(ELLIPSE, carPos.x+15, carPos.y+15, 20, 20); 
