@@ -4,6 +4,8 @@ class Button {
   color circColor, squareColor;
   color circHighlight, squareHighlight;
 
+  boolean buttonIsClicked = false;
+
   Button() {
     circPos = new PVector(width/2 +300, height/2);
     squarePos = new PVector(width/2-300, height/2-50);
@@ -21,20 +23,27 @@ class Button {
     ellipse(circPos.x, circPos.y, _circSize, _circSize);
   }
 
-  void circRollover(){
-    
+  void circRollover() {
   }
-  
-  void squareRollover(float _squareSize){
-     if (mouseX > squarePos.x && 
-    mouseX < squarePos.x + squareSize && 
-    mouseY > squarePos.y && 
-    mouseY< squarePos.y + squareSize) {
-     fill(squareHighlight);
-  } else {
-    fill(squareColor);
+
+  void squareRollover(float _squareSize) {
+    if (mouseX > squarePos.x && 
+      mouseX < squarePos.x + squareSize && 
+      mouseY > squarePos.y && 
+      mouseY< squarePos.y + squareSize) {
+      fill(squareHighlight);
+    } else {
+      fill(squareColor);
+    }
+    rect(squarePos.x, squarePos.y, _squareSize, _squareSize);
   }
-  rect(squarePos.x, squarePos.y, _squareSize, _squareSize);
-  }
-  
+
+  //void detection() {
+  //  if (mouseX > squarePos.x && 
+  //    mouseX < squarePos.x + squareSize && 
+  //    mouseY > squarePos.y && 
+  //    mouseY< squarePos.y + squareSize) {
+  //    buttonIsClicked = !buttonIsClicked;
+  //  }
+  //}
 }
