@@ -26,6 +26,6 @@ class Drop{
     c = color(map(pos.y,100, 255,100, 255),0, map(pos.y, 100, 255, 100, 255));
     
     fill(c);
-    ellipse(pos.x, pos.y, size, size);
+    ellipse(pos.x, pos.y, _size, _size);
   }
 }
