@@ -1,39 +1,50 @@
 class Circle {
-  PVector pos; 
+  int x, y, size; 
 
-  color circleHighlight, circleColor; 
+  color circleColor, secondColor, thirdColor; 
 
-  float size;
 
-  boolean circleOver = false;
+  boolean strokeChange = false;
 
-  Circle(float _startX, float _startY) {
-    pos = new PVector(_startX, _startY);
-    size = random(10, 90);
-    c = color(255, 0, 0);
+  Circle(int _startX, int _startY) {
+    x = _startX;
+    y = _startY;
+    size = int(random(10, 90));
+    circleColor = color(255, 0, 0);
+    secondColor = color(0, 255, 0);
+    thirdColor = color (0, 0, 255);
   }
 
-  void display(float _startX, float _startY) {
-    pos.x = _startX;
-    pos.y= _startY;
-    fill(c);
-    if (circleOver) {
-      fill(circleHighlight);
-    } else {
-      fill(circleColor);
+  void display(int x, int y, boolean circleOver) {
+
+    fill(circleColor);
+
+    if (circleOver == true) {
+      if (overCircle(x, y, size)) {
+        stroke(0,255,255);
+        strokeChange = true;
+      } else {
+        noStroke();
+        strokeChange = false;
+      }
     }
-    ellipse(pos.x, pos.y, size, size);
+    
+    ellipse(x, y, size, size);
   }
 
-  void mousePressed() {
-  }
+  //  if (circleOver) {
+  //    fill(secondColor);
+  //  } else {
+  //    fill(circleColor);
+  //  }
+  //  ellipse(x, y, size, size);
+  //}
 
-  boolean overCircle(float _startX, float _startY, int size) {
-    pos.x = _startX;
-    pos.y= _startY;
 
-    float disX = pos.x - mouseX;
-    float disY = pos.y - mouseY;
+  boolean overCircle(int x, int y, int size) {
+
+    float disX = x - mouseX;
+    float disY = y - mouseY;
     if (sqrt(sq(disX) + sq(disY)) < size/2 ) {
       return true;
     } else {

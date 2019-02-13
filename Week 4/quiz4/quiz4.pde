@@ -7,9 +7,15 @@
 //10 Points: Have each button have a random size
 //30 Points: Line up your circles in a grid
 //20 Points: Have the mouse Drag over the circles to change them in addition to click
+
+// AHHHHHHH I will keep working on this
+
 Circle original;
+
 int arrayLength = 50;
 Circle[] circles= new Circle[arrayLength];
+
+boolean circleOver = false;
 
 void setup() {
   size(800, 500);
@@ -17,7 +23,7 @@ void setup() {
   original = new Circle(width/2, height/2);
 
   for (int i=0; i<arrayLength; i++) {
-    circles[i] = new Circle(random(width), random(height));
+    circles[i] = new Circle(int(random(width)), int(random(height)));
   }
 }
 
@@ -26,7 +32,12 @@ void draw() {
 
   for (int i=0; i<arrayLength; i++) {
     //circles[i].display();
-    circles[i].display(i%10*width/10, i/30 * height/10);
-    circles[i].mousePressed();
+    circles[i].display(i%10*width/10, i/30 * height/10, true);
+  }
+}
+
+void mousePressed(){
+  if(circles.strokeChange == true){
+    
   }
 }
