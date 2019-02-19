@@ -1,7 +1,4 @@
-
-// I DONT KNOW WHY THE MOUSE ISN'T DETECTING BEING INSIDE THE NEW BUTTON !!! 
-//Formula seems right!!
-
+// reference for dragging shape https://www.youtube.com/watch?v=72Ej8JRj6jk
 Button circleButton;
 Button squareButton;
 Button newButton;
@@ -12,6 +9,8 @@ color bgColor = color(255);
 boolean squareIsClicked = false;
 boolean circleIsClicked = false;
 boolean shootFireworks = false;
+boolean newButtonDisp = false;
+boolean inRect = false;
 
 void setup() {
   size(800, 500);
@@ -26,22 +25,37 @@ void draw() {
   //background(bgColor);
   circleButton.circDisplay();
   squareButton.squareDisplay();
- 
-//fireworks
+
+  if (newButtonDisp == true) {
+    newButton.newDisplay();
+  }
+
+  //fireworks
   for (int i = 0; i<fireworks.size(); i++) {
     if (shootFireworks == true) {
       Firework f = fireworks.get(i);
       f.display();
     }
   }
-  //drag circle 
+
+  //dragging big rectangle
+  if (newButton.newRollover == true) {
+    if (mousePressed) {
+      newButton.newX = mouseX; 
+      newButton.newY = mouseY;
+    }
+  }
+
+
+
+  //dragging the circle 
   //if (circleButton.circleRollover == true) {
   //  if (mousePressed) {
   //    circleButton.circleX = mouseX;
   //    circleButton.circleY = mouseY;
   //  }
   //}
-  
+
   //circleButton drag location 
   //noFill();
   //stroke(255,0,0);
@@ -67,13 +81,11 @@ void mouseClicked() {
     circleIsClicked = false;
   }
 
+
+
   if (circleIsClicked == true) {
-    newButton.newDisplay();
-
+    newButtonDisp = true;
   }
-  
- 
-
 
   //println(squareIsClicked);
   //println(circleIsClicked);

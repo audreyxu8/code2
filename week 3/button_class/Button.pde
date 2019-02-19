@@ -65,22 +65,25 @@ class Button {
       mouseY > newY && 
       mouseY< newY + newSizeY) {
       newRollover = true;
-      fill(circHighlight);
+      println(newRollover);
     } else { 
       newRollover = false;
       println(newRollover);
     }
 
     if (newX > rectStrokeX && 
-      newX < rectStrokeX+rectStrokeSizeX &&
+      newX < rectStrokeX+ rectStrokeSizeX &&
       newY > rectStrokeY &&
       newY < rectStrokeY+ rectStrokeSizeY) {
       inRect = true;
     } else {
       inRect = false;
     }
-    
-    fill(circColor);
+
+    if (inRect == true) {
+      fill(0, 255, 0);
+    }
+
     noStroke();
     rect(newX, newY, newSizeX, newSizeY);
 
@@ -88,20 +91,4 @@ class Button {
     stroke(255, 0, 0);
     rect(rectStrokeX, rectStrokeY, rectStrokeSizeX, rectStrokeSizeY);
   }
-
-  //void newDrag() {
-  //  if (mouseX > newX && 
-  //    mouseX < newX + newSizeX && 
-  //    mouseY > newY && 
-  //    mouseY< newY + newSizeY) {
-  //    newRollover = true;
-  //    newX = mouseX;
-  //    newY = mouseY;
-  //  } else { 
-  //    newRollover = false;
-  //    println(newRollover);
-  //  }
-
-
-  //}
 }
