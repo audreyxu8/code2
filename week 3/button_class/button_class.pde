@@ -1,76 +1,80 @@
-//30 points: Have a button that's inactive until you press another button
-//50 points: Have different "spaces" or "screens" with separate buttons for each one (repeatable)
-//75 points: Make a button that doesn't activate until it is dragged to a certain location
-//20 - ?? points: Make buttons that do cool effects (repeatable)
-//10 - ?? points (per button): Cool Button Icons
 
-Button button;
+// I DONT KNOW WHY THE MOUSE ISN'T DETECTING BEING INSIDE THE NEW BUTTON !!! 
+//Formula seems right!!
+
+Button circleButton;
+Button squareButton;
+Button newButton;
+
 ArrayList<Firework> fireworks;
-PVector circPos, squarePos;
-float circSize, squareSize;
-color bgColor = color(random(100));
-boolean buttonIsClicked = false;
+
+color bgColor = color(255);
+boolean squareIsClicked = false;
+boolean circleIsClicked = false;
+boolean shootFireworks = false;
 
 void setup() {
   size(800, 500);
   background(bgColor);
-  button = new Button();
+  circleButton = new Button();
+  squareButton = new Button();
+  newButton = new Button();
   fireworks = new ArrayList<Firework>();
-  circPos = new PVector(width/2 +300, height/2);
-  squarePos = new PVector(width/2-300, height/2-50);
 }
 
 void draw() {
-
-  button.circDisplay(100);
-  button.squareDisplay(100);
-  button.squareRollover(100);
-
-  if (buttonIsClicked) {
-    bgColor = color(100, 100, 100);
-  } else {
-    bgColor = color(random(100));
+  //background(bgColor);
+  circleButton.circDisplay();
+  squareButton.squareDisplay();
+ 
+//fireworks
+  for (int i = 0; i<fireworks.size(); i++) {
+    if (shootFireworks == true) {
+      Firework f = fireworks.get(i);
+      f.display();
+    }
   }
+  //drag circle 
+  //if (circleButton.circleRollover == true) {
+  //  if (mousePressed) {
+  //    circleButton.circleX = mouseX;
+  //    circleButton.circleY = mouseY;
+  //  }
+  //}
+  
+  //circleButton drag location 
+  //noFill();
+  //stroke(255,0,0);
+  //ellipse(circleStrokeX, circleStrokeY, circleStrokeSize, circleStrokeSize);
 }
 
-void detection() {
-  if (mouseX > squarePos.x && 
-    mouseX < squarePos.x + squareSize && 
-    mouseY > squarePos.y && 
-    mouseY< squarePos.y + squareSize) {
-    bgColor = color(100, 100, 100);
-  } else {
-    bgColor = color(random(100));
-  }
-}
 
 void mouseClicked() {
-  if (mouseX > squarePos.x && 
-    mouseX < squarePos.x + squareSize && 
-    mouseY > squarePos.y && 
-    mouseY< squarePos.y + squareSize) {
-    buttonIsClicked = !buttonIsClicked;
+  if (squareButton.squareRollover ==true) {
+    squareIsClicked = true;
+  } else {
+    squareIsClicked = false;
   }
 
-  if (buttonIsClicked == true) {
-    for (int i=0; i<fireworks.size(); i++) {
-      Firework f = fireworks.get(i);
-      f.display(random(0, 50));
-      f.fly();
-    }
+  if (squareIsClicked == true) {
+    shootFireworks = true;
     fireworks.add(new Firework());
+    background(50);
   }
-  println(buttonIsClicked);
+  if (circleButton.circleRollover == true) {
+    circleIsClicked = true;
+  } else {
+    circleIsClicked = false;
+  }
+
+  if (circleIsClicked == true) {
+    newButton.newDisplay();
+
+  }
+  
+ 
+
+
+  //println(squareIsClicked);
+  //println(circleIsClicked);
 }
-
-
-//void mouseClicked() {
-//  button.detection();
-//  for (int i=0; i<fireworks.size(); i++) {
-//    Firework f = fireworks.get(i);
-//    f.display(random(0, 50));
-//    f.fly();
-//  }
-
-//  fireworks.add(new Firework());
-//}
