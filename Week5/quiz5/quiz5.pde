@@ -15,7 +15,6 @@ Square squareC;
 Square squareD; 
 Square squareE;
 Square squareF;
-
 void setup() {
   size(800, 500);
   background(0);

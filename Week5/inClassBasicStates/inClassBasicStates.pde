@@ -6,7 +6,13 @@ int STATE = START_SCREEN;
 void setup() {
   size(500, 500);
 }
+
+//switch is like a super boolean
+
 void draw() {
+  // if STATE is = 0, then showStartScreen();
+  // u dont use if statement bc faster for the comp cuz u have to run thhru each if statement
+  //but this it skips everything else but the actual case
   switch (STATE) {
     case 0: // start screen
       showStartScreen();
