@@ -3,6 +3,8 @@
 PVector centerPoint; 
 PVector offset;
 
+int numObject = 5; 
+
 float dist = 50; 
 
 void setup() {
@@ -32,6 +34,9 @@ void draw() {
   
 }
 
-void keyPressed(){
-  
-}
+//void keyPressed(){
+//  switch(key){
+//    case 'a': 
+//    numObjects ++
+//  }
+//}
